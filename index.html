@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روميتك - إنشاء حساب</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #FBFBFB;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .background-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(50% 50% at 50% 50%, rgba(124, 185, 224, 0.5) 0%, rgba(124, 185, 224, 0) 100%);
+            pointer-events: none;
+        }
+
+        .logo {
+            margin-bottom: 2rem;
+            z-index: 1;
+        }
+
+        .logo img {
+            height: 35px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 580px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.24);
+            backdrop-filter: blur(91.30px);
+            border-radius: 30px;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #25252E;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: start;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            color: #585866;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: right;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid rgba(102, 102, 102, 0.35);
+            border-radius: 12px;
+            font-size: 16px;
+            background: transparent;
+            color: #25252E;
+        }
+
+        .password-group {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(102, 102, 102, 0.8);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 1rem 0;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            accent-color: #0326D8;
+        }
+
+        .remember-me label {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .terms {
+            text-align: right;
+            margin: 1rem 0;
+            font-size: 16px;
+            color: #24242D;
+        }
+
+        .terms a {
+            color: #24242D;
+            text-decoration: underline;
+            font-weight: 700;
+        }
+
+        .login-btn, .submit-btn, .btn-primary {
+            width: 100%;
+            padding: 17px;
+            background: #0326D8;
+            color: white;
+            border: none;
+            border-radius: 32px;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 1rem 0;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .forgot-password a {
+            color: #24242D;
+            text-decoration: underline;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .signup-link span {
+            color: #80808E;
+            font-size: 16px;
+        }
+
+        .signup-link a {
+            color: #0326D8;
+            text-decoration: none;
+            font-size: 16px;
+            margin-right: 4px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 23px;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: rgba(102, 102, 102, 0.25);
+        }
+
+        .divider span {
+            color: #585866;
+            font-size: 20px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .social-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .password-toggle svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .password-toggle span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Step Indicator Styles */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(51, 51, 51, 0.35);
+            z-index: 1;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(51, 51, 51, 0.50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .step.active .step-number {
+            background: #25252E;
+        }
+
+        .step.completed .step-number {
+            background: #81818F;
+        }
+
+        .step-label {
+            font-size: 20px;
+            color: #81818F;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .step.active .step-label {
+            color: #25252E;
+        }
+
+        /* Password Requirements */
+        .password-requirements {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(102, 102, 102, 0.60);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px;
+        }
+
+        .requirement svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: rgba(102, 102, 102, 0.60);
+        }
+
+        .requirement.met {
+            color: #0326D8;
+        }
+
+        .requirement.met svg {
+            background: #0326D8;
+        }
+
+        /* Interests */
+        .interests-section {
+            margin-top: 2rem;
+        }
+
+        .interests-title {
+            color: #25252E;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .interests-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+            justify-content: flex-end;
+        }
+
+        .interest-tag {
+            padding: 8px 16px;
+            background: #E0E4F7;
+            border-radius: 20px;
+            color: #585866;
+            font-size: 16px;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .interest-tag.selected {
+            background: #0326D8;
+            color: white;
+        }
+
+        .interest-tag.add-more {
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Phone Input */
+        .phone-input-container {
+            position: relative;
+        }
+
+        .phone-input {
+            width: 100%;
+            padding: 0.75rem;
+            padding-left: 100px;
+            border: 1px solid rgba(102, 102, 102, 0.35);
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            background-color: transparent;
+        }
+
+        .country-select {
+            position: absolute;
+            left: 1px;
+            top: 1px;
+            bottom: 1px;
+            width: 90px;
+            display: flex;
+            align-items: center;
+            padding: 0 0.5rem;
+            gap: 0.5rem;
+            border-right: 1px solid rgba(102, 102, 102, 0.35);
+            border-radius: 11px 0 0 11px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .country-flag {
+            width: 24px;
+            height: 16px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .country-code {
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        /* Gender Selection */
+        .gender-group {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .radio-group input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #0326D8;
+            cursor: pointer;
+        }
+
+        .radio-group label {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        /* Select Styles */
+        .select-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .select-wrapper select {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(102, 102, 102, 0.35);
+            font-size: 16px;
+            color: #585866;
+            background: transparent;
+            appearance: none;
+        }
+
+        .select-wrapper::after {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-75%) rotate(-45deg);
+            width: 10px;
+            height: 10px;
+            border-left: 2px solid #585866;
+            border-bottom: 2px solid #585866;
+            border-right: none;
+            border-top: none;
+            pointer-events: none;
+        }
+
+        /* Navigation Buttons */
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 18.5px;
+            border: none;
+            border-radius: 40px;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #0326D8;
+            color: white;
+            min-width: 220px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #81818F;
+            min-width: 120px;
+        }
+
+        /* Form Steps */
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .subtitle {
+            color: #585866;
+            font-size: 16px;
+        }
+
+        .subtitle a {
+            color: #25252E;
+            text-decoration: none;
+            font-weight: 700;
+            margin-right: 0.25rem;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .step-label {
+                font-size: 0.75rem;
+            }
+
+            .password-requirements {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-gradient"></div>
+    
+    <div class="logo">
+        <img src="Group 2.png" alt="روميتك">
+    </div>
+
+    <div class="container">
+        <!-- Login Form (Step 1) -->
+        <div class="form-step active" id="step1">
+            <h1>تسجيل دخول</h1>
+            
+            <div class="form-group">
+                <label>بريدك الالكتروني</label>
+                <input type="email" id="login-email" required>
+            </div>
+
+            <div class="form-group">
+                <label>كلمة السر</label>
+                <div class="password-group">
+                    <input type="password" id="login-password" required>
+                    <div class="password-toggle" onclick="togglePassword('login-password')">
+                        <svg class="eye-open" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <span>اخفاء</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="remember-me">
+                <input type="checkbox" id="remember">
+                <label for="remember">تذكرني</label>
+            </div>
+
+            <div class="terms">
+                بالاستمرار، أنت توافق على <a href="#">شروط الاستخدام</a> و<a href="#">سياسة الخصوصية.</a>
+            </div>
+
+            <button type="button" class="login-btn" onclick="goToStep(2)">تسجيل دخول</button>
+
+            <div class="forgot-password">
+                <a href="#">نسيت كلمة المرور</a>
+            </div>
+
+            <div class="signup-link">
+                <span>لا تمتلك حساب ؟</span>
+                <a href="#" onclick="goToStep(2); return false;">انشئ حسابك</a>
+            </div>
+
+            <div class="divider">
+                <span>أو قم بالتسجيل باستخدام</span>
+            </div>
+
+            <div class="social-login">
+                <a href="#" class="social-btn">
+                    <svg width="13" height="22" viewBox="0 0 13 22" fill="none">
+                        <path d="M11.7137 12.2816L12.3356 8.3301H8.44522V5.76699C8.44522 4.6857 8.98767 3.63107 10.7302 3.63107H12.5V0.26699C12.5 0.26699 10.8945 0 9.36027 0C6.15484 0 4.06166 1.89294 4.06166 5.31845V8.3301H0.5V12.2816H4.06166V21.8345C4.77671 21.944 5.50824 22 6.25344 22C6.99864 22 7.73017 21.944 8.44522 21.8345V12.2816H11.7137Z" fill="url(#paint0_linear_235_1348)"/>
+                        <defs>
+                            <linearGradient id="paint0_linear_235_1348" x1="6.5" y1="0" x2="6.5" y2="22" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#0E88F0"/>
+                                <stop offset="1" stop-color="#097BEB"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn">
+                    <svg width="43" height="42" viewBox="0 0 43 42" fill="none">
+                        <path d="M39.875 21C39.875 31.143 31.6522 39.375 21.5 39.375C11.3478 39.375 3.125 31.143 3.125 21C3.125 10.8478 11.3478 2.625 21.5 2.625C31.6522 2.625 39.875 10.8478 39.875 21Z" fill="white"/>
+                        <path d="M30.1128 16.3503C30.0125 16.4088 27.6255 17.6433 27.6255 20.3803C27.738 23.5017 30.6378 24.5964 30.6875 24.5964C30.6378 24.6549 30.2497 26.0876 29.1003 27.5895C28.188 28.8832 27.1755 30.1875 25.638 30.1875C24.1755 30.1875 23.6505 29.3253 21.963 29.3253C20.1508 29.3253 19.638 30.1875 18.2505 30.1875C16.713 30.1875 15.6255 28.8133 14.6635 27.5317C13.4138 25.8544 12.3516 23.2222 12.3141 20.6948C12.2888 19.3555 12.5644 18.039 13.2638 16.9208C14.251 15.3597 16.0135 14.3 17.9383 14.2651C19.413 14.2187 20.7255 15.2086 21.6255 15.2086C22.488 15.2086 24.1005 14.2651 25.925 14.2651C26.7125 14.2658 28.8125 14.4869 30.1128 16.3503ZM21.5008 13.9977C21.2383 12.7746 21.963 11.5516 22.638 10.7714C23.5005 9.82789 24.8628 9.1875 26.0375 9.1875C26.1125 10.4106 25.6372 11.6101 24.7878 12.4837C24.0255 13.4272 22.713 14.1374 21.5008 13.9977Z" fill="url(#paint0_linear_104_1719)"/>
+                        <defs>
+                            <linearGradient id="paint0_linear_104_1719" x1="21.5" y1="9.1875" x2="21.5" y2="30.1875" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#293645"/>
+                                <stop offset="1" stop-color="#0F1011"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M22.0637 12.2235C22.0637 11.3961 21.9952 10.7924 21.8469 10.1663H12.2065V13.9005H17.8652C17.7512 14.8285 17.1351 16.2261 15.766 17.1652L15.7468 17.2902L18.795 19.6044L19.0061 19.625C20.9456 17.8696 22.0637 15.2869 22.0637 12.2235" fill="#4285F4"/>
+                        <path d="M12.2048 22.0625C14.9771 22.0625 17.3045 21.168 19.0044 19.6251L15.7643 17.1653C14.8973 17.7579 13.7336 18.1716 12.2048 18.1716C9.48959 18.1716 7.18505 16.4163 6.36354 13.9901L6.24313 14.0001L3.07368 16.4039L3.03223 16.5168C4.72069 19.8039 8.18894 22.0625 12.2048 22.0625Z" fill="#34A853"/>
+                        <path d="M6.3655 13.9902C6.14874 13.3641 6.02329 12.6932 6.02329 12C6.02329 11.3068 6.14874 10.636 6.3541 10.0099L6.34836 9.87652L3.13917 7.43408L3.03418 7.48303C2.33827 8.84707 1.93896 10.3788 1.93896 12C1.93896 13.6212 2.33827 15.1529 3.03418 16.5169L6.3655 13.9902" fill="#FBBC05"/>
+                        <path d="M12.2049 5.82831C14.1329 5.82831 15.4335 6.64448 16.1751 7.32654L19.0729 4.55375C17.2932 2.93257 14.9772 1.9375 12.2049 1.9375C8.18897 1.9375 4.7207 4.19595 3.03223 7.48301L6.35216 10.0099C7.18507 7.58367 9.48962 5.82831 12.2049 5.82831" fill="#EB4335"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Basic Information Form (Step 2) -->
+        <div class="form-step" id="step2">
+            <div class="header">
+                <h1>إنشاء حساب جديد</h1>
+                <div class="subtitle">
+                    تمتلك حساباً بالفعل؟
+                    <a href="#" onclick="goToStep(1); return false;">تسجيل دخول</a>
+                </div>
+            </div>
+
+            <div class="steps">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">المعلومات الأساسية</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-label">كلمة المرور</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">التفاصيل الشخصية</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>الاسم الأول</label>
+                    <input type="text" id="first-name" required>
+                </div>
+                <div class="form-group">
+                    <label>الاسم الأخير</label>
+                    <input type="text" id="last-name" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>بريدك الالكتروني</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>رقم الهاتف</label>
+                <div class="phone-input-container">
+                    <input type="tel" class="phone-input" id="phone" required>
+                    <div class="country-select">
+                        <span class="country-code">+1</span>
+                        <img src="https://flagcdn.com/w40/jo.png" alt="Jordan" class="country-flag">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>الجنس</label>
+                <div class="gender-group">
+                    <div class="radio-group">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">ذكر</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">أنثى</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="btn btn-primary" onclick="goToStep(3)">التالي</button>
+            </div>
+        </div>
+
+        <!-- Password Form (Step 3) -->
+        <div class="form-step" id="step3">
+            <div class="header">
+                <h1>انشاء حساب جديد</h1>
+                <div class="subtitle">
+                    تمتلك حساباً بالفعل؟
+                    <a href="#" onclick="goToStep(1); return false;">تسجيل دخول</a>
+                </div>
+            </div>
+            
+            <div class="steps">
+                <div class="step completed">
+                    <div class="step-number">1</div>
+                    <div class="step-label">المعلومات الأساسية</div>
+                </div>
+                <div class="step active">
+                    <div class="step-number">2</div>
+                    <div class="step-label">كلمة المرور</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">التفاصيل الشخصية</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>كلمة السر</label>
+                <div class="password-group">
+                    <input type="password" id="password" class="password-input" required>
+                    <div class="password-toggle" onclick="togglePassword('password')">
+                        <span>اخفاء</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>تأكيد كلمة السر</label>
+                <div class="password-group">
+                    <input type="password" id="confirmPassword" class="password-input" required>
+                    <div class="password-toggle" onclick="togglePassword('confirmPassword')">
+                        <span>اخفاء</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="password-requirements">
+                <div class="requirement" id="lengthReq">
+                    <svg viewBox="0 0 16 16"></svg>
+                    استخدم أكثر من 8 حروف
+                </div>
+                <div class="requirement" id="numberReq">
+                    <svg viewBox="0 0 16 16"></svg>
+                    استخدم رقم (مثل:1234)
+                </div>
+                <div class="requirement" id="symbolReq">
+                    <svg viewBox="0 0 16 16"></svg>
+                    استخدم رموز (مثل : @#$%&)
+                </div>
+                <div class="requirement" id="caseReq">
+                    <svg viewBox="0 0 16 16"></svg>
+                    استخدم حروف كبيرة وصغيرة
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="btn btn-secondary" onclick="goToStep(2)">السابق</button>
+                <button type="button" class="btn btn-primary" onclick="goToStep(4)">التالي</button>
+            </div>
+        </div>
+
+        <!-- Personal Details Form (Step 4) -->
+        <div class="form-step" id="step4">
+            <div class="header">
+                <h1>انشاء حساب جديد</h1>
+                <div class="subtitle">
+                    تمتلك حساباً بالفعل؟
+                    <a href="#" onclick="goToStep(1); return false;">تسجيل دخول</a>
+                </div>
+            </div>
+            
+            <div class="steps">
+                <div class="step completed">
+                    <div class="step-number">1</div>
+                    <div class="step-label">المعلومات الأساسية</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-number">2</div>
+                    <div class="step-label">كلمة المرور</div>
+                </div>
+                <div class="step active">
+                    <div class="step-number">3</div>
+                    <div class="step-label">التفاصيل الشخصية</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>ماذا تفعل حاليًا؟</label>
+                    <div class="select-wrapper">
+                        <select id="occupation" required>
+                            <option value="" disabled selected>الحالة المهنية</option>
+                            <option value="student">طالب</option>
+                            <option value="employed">موظف</option>
+                            <option value="self-employed">عمل حر</option>
+                            <option value="unemployed">عاطل عن العمل</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>العمر</label>
+                    <input type="number" id="age" min="18" max="100" required>
+                </div>
+            </div>
+
+            <div class="interests-section">
+                <h2 class="interests-title">ما هي اهتماماتك؟</h2>
+                <div class="interests-grid">
+                    <div class="interest-tag" data-interest="shopping">التسوق</div>
+                    <div class="interest-tag" data-interest="reading">القراءة</div>
+                    <div class="interest-tag" data-interest="movies">مشاهدة الأفلام والمسلسلات</div>
+                    <div class="interest-tag" data-interest="music">موسيقى</div>
+                    <div class="interest-tag" data-interest="gaming">ألعاب الفيديو</div>
+                    <div class="interest-tag" data-interest="pets">محب للحيوانات</div>
+                    <div class="interest-tag" data-interest="cafes">الخروج إلى المقاهي</div>
+                    <div class="interest-tag" data-interest="art">الفنون والتصميم</div>
+                    <div class="interest-tag" data-interest="travel">السفر والمغامرات</div>
+                    <div class="interest-tag" data-interest="cooking">الطبخ</div>
+                    <div class="interest-tag" data-interest="karaoke">كاريوكي والموسيقى الحية</div>
+                    <div class="interest-tag" data-interest="sports">الرياضة واللياقة البدنية</div>
+                    <div class="interest-tag" data-interest="homebody">شخص بيتوتي</div>
+                    <div class="interest-tag add-more">
+                        اضافة المزيد
+                        <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.52599 6.77131L3.75466 2.99998L4.69732 2.05731L7.99732 5.35731L11.2973 2.05731L12.24 2.99998L8.46866 6.77131C8.34364 6.89629 8.1741 6.9665 7.99732 6.9665C7.82055 6.9665 7.65101 6.89629 7.52599 6.77131Z" fill="black"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="btn btn-secondary" onclick="goToStep(3)">السابق</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">ابدأ باستخدام روماتيك الآن</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form navigation
+        function goToStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show the requested step
+            document.getElementById('step' + step).classList.add('active');
+            
+            // Save form data to localStorage if needed
+            saveFormData();
+        }
+        
+        // Toggle password visibility
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const toggle = input.parentElement.querySelector('.password-toggle');
+            const text = toggle.querySelector('span');
+            const svg = toggle.querySelector('svg');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                text.textContent = 'اظهار';
+                svg.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+            } else {
+                input.type = 'password';
+                text.textContent = 'اخفاء';
+                svg.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+            }
+        }
+        
+        // Password validation
+        document.getElementById('password')?.addEventListener('input', function(e) {
+            updatePasswordRequirements(e.target.value);
+        });
+        
+        function updatePasswordRequirements(password) {
+            if (!password) return;
+            
+            const requirements = {
+                lengthReq: password.length >= 8,
+                numberReq: /\d/.test(password),
+                symbolReq: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+                caseReq: /[a-z]/.test(password) && /[A-Z]/.test(password)
+            };
+            
+            for (const [id, met] of Object.entries(requirements)) {
+                const element = document.getElementById(id);
+                if (element) {
+                    if (met) {
+                        element.classList.add('met');
+                    } else {
+                        element.classList.remove('met');
+                    }
+                }
+            }
+        }
+        
+        // Interest tag selection
+        document.querySelectorAll('.interest-tag').forEach(tag => {
+            if (!tag.classList.contains('add-more')) {
+                tag.addEventListener('click', () => {
+                    tag.classList.toggle('selected');
+                });
+            }
+        });
+        
+        // Save form data to localStorage
+        function saveFormData() {
+            const formData = {
+                // Step 1 (Login)
+                loginEmail: document.getElementById('login-email')?.value,
+                loginPassword: document.getElementById('login-password')?.value,
+                remember: document.getElementById('remember')?.checked,
+                
+                // Step 2 (Basic Info)
+                firstName: document.getElementById('first-name')?.value,
+                lastName: document.getElementById('last-name')?.value,
+                email: document.getElementById('email')?.value,
+                phone: document.getElementById('phone')?.value,
+                gender: document.querySelector('input[name="gender"]:checked')?.value,
+                
+                // Step 3 (Password)
+                password: document.getElementById('password')?.value,
+                confirmPassword: document.getElementById('confirmPassword')?.value,
+                
+                // Step 4 (Personal Details)
+                occupation: document.getElementById('occupation')?.value,
+                age: document.getElementById('age')?.value,
+                interests: Array.from(document.querySelectorAll('.interest-tag.selected'))
+                    .map(tag => tag.dataset.interest)
+            };
+            
+            localStorage.setItem('formData', JSON.stringify(formData));
+        }
+        
+        // Load form data from localStorage
+        function loadFormData() {
+            const formData = JSON.parse(localStorage.getItem('formData') || '{}');
+            
+            // Step 1 (Login)
+            if (document.getElementById('login-email')) document.getElementById('login-email').value = formData.loginEmail || '';
+            if (document.getElementById('login-password')) document.getElementById('login-password').value = formData.loginPassword || '';
+            if (document.getElementById('remember')) document.getElementById('remember').checked = formData.remember || false;
+            
+            // Step 2 (Basic Info)
+            if (document.getElementById('first-name')) document.getElementById('first-name').value = formData.firstName || '';
+            if (document.getElementById('last-name')) document.getElementById('last-name').value = formData.lastName || '';
+            if (document.getElementById('email')) document.getElementById('email').value = formData.email || '';
+            if (document.getElementById('phone')) document.getElementById('phone').value = formData.phone || '';
+            
+            if (formData.gender) {
+                const genderInput = document.querySelector(`input[name="gender"][value="${formData.gender}"]`);
+                if (genderInput) genderInput.checked = true;
+            }
+            
+            // Step 3 (Password)
+            if (document.getElementById('password')) document.getElementById('password').value = formData.password || '';
+            if (document.getElementById('confirmPassword')) document.getElementById('confirmPassword').value = formData.confirmPassword || '';
+            
+            // Step 4 (Personal Details)
+            if (document.getElementById('occupation')) document.getElementById('occupation').value = formData.occupation || '';
+            if (document.getElementById('age')) document.getElementById('age').value = formData.age || '';
+            
+            if (formData.interests && formData.interests.length) {
+                formData.interests.forEach(interest => {
+                    const interestTag = document.querySelector(`.interest-tag[data-interest="${interest}"]`);
+                    if (interestTag) interestTag.classList.add('selected');
+                });
+            }
+            
+            // Update password requirements if password exists
+            if (formData.password) {
+                updatePasswordRequirements(formData.password);
+            }
+        }
+        
+        // Submit the form
+        function submitForm() {
+            saveFormData();
+            alert('تم إنشاء الحساب بنجاح!');
+            // Here you would typically submit the form to your backend
+            // For now, we'll just redirect to step 1
+            goToStep(1);
+        }
+        
+        // Load saved form data on page load
+        document.addEventListener('DOMContentLoaded', loadFormData);
+    </script>
+</body>
+</html>
